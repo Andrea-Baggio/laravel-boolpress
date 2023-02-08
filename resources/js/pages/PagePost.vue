@@ -1,8 +1,8 @@
 <template>
-    <div>
-        <h1>Show del post</h1>
+    <div class="container">
+        <h1>{{objPost.title}}</h1>
         <p>
-        Lo slug del posts è: {{ slug }} <!-- questo slug, avendo settato le sue props in front.js come true, lo troviamo proprio nelle sue props, che andiamo a scrivere in script -->
+            {{objPost.content}} <!-- questo slug, dato che abbiamo settato le sue props in front.js come true, lo ritroviamo nelle props di PagePost.vue, che andiamo a scrivere nello script -->
         </p>
     </div>
 </template>
@@ -11,8 +11,17 @@
 export default {
     props: [
         'slug',
-    ]
-}
+    ],
+    data() {
+        return {
+            objPost: [],
+        }
+    },
+    created() {
+        axios.get('/api/posts/' + this.slug) //qua metto un + perché la show vuole anche l'argomento (api/posts/{post}), che in questo caso è lo slug (devo scrivere this.NomeDellaProps, che in questo caso è slug)
+            .then(axiosResponse => this.objPost = axiosResponse.data.results);
+    }
+  }
 </script>
 
 <style>

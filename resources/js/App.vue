@@ -1,11 +1,14 @@
 <template>
     <div>
         <NavBar />
-        <h1>Io vengo da App</h1>
-        <main>
-            <router-view></router-view> <!-- questa scritta è una specie di yeld, ovvero va prendere la rotta selezionata (tipo l'about) e la mostra all'utente, però apparirà solo dentro questo tag, pertanto tutto ciò che è al di fuori rimmarrà (in questo caso, se prende la rotta dell'about ce lo mostrerà lasciando sopra la navbar e il titolo, e lasciando sotto il footer, i quali sono componenti statici)-->
-        </main>
-        <FooterComponent />
+        <div class="container">
+            <h1>Io vengo da App</h1>
+            <main>
+                <router-view></router-view> <!-- questa scritta è una specie di yeld, ovvero va prendere la rotta selezionata (tipo l'about) e la mostra all'utente, però apparirà solo dentro questo tag, pertanto tutto ciò che è al di fuori rimmarrà (in questo caso, se prende la rotta dell'about ce lo mostrerà lasciando sopra la navbar e il titolo, e lasciando sotto il footer, i quali sono componenti statici)-->
+            </main>
+            <FooterComponent />
+        </div>
+
 
         <!-- <div class="container">
             <h1>Frontoffice in Vue</h1>

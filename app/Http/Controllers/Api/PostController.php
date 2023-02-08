@@ -10,7 +10,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::paginate();
 
         // return view('posts.index', compact('posts'));
 
@@ -21,13 +21,30 @@ class PostController extends Controller
     }
 
 
-    public function show(Post $post)
+    public function show($post)
     {
-        // return view('posts.index', compact('post'));
+        $post = Post::where('slug', $post)->with(['category', 'tags'])->first();
+
+        if ($post) {
+            return response()->json([
+                'success' => true,
+                'results' => $post,
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+            ]);
+        }
+    }
+
+
+    public function random()
+    {
+        $posts = Post::inRandomOrder()->limit(9)->get();
 
         return response()->json([
             'success' => true,
-            'results' => $post,
+            'results' => $posts,
         ]);
     }
 
